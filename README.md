@@ -9,10 +9,15 @@ I've found that being a developer doesn't exclude me from being part of the desi
 
 
 ### MindMap
+**What I use:**
+
+* [MindNode](https://mindnode.com) - Has a great interface and the iCloud sync between iOS and macOS means I can work out ideas no matter where I'm at. 
+
+Most of the time a new project is started with a simple idea, or even statement regarding the goal of the application. Although this isn't always a necessary, or even required, step in the process if you do find yourself in the early stages of the app design then a mind map can help flush out some of the main parts of the app. This part is usually a quick process, normally just used to get the basic idea down so I can move into the flowchart part with specific layouts already in mind. 
+
 ![MindNode starting point](images/MindNode_first_round.png)
 *Initial idea node for bumblebee*
 
-Most of the time a new project is started with a simple idea, or even statement regarding the goal of the application. I like to use [MindNode](https://mindnode.com) for creating a mind map that can later be used to create the flowchart. This part is usually a quick process, normally just used to get the basic idea down so I can move into the flowchart part with specific layouts already in mind. 
 
 ![MindNode near complete](images/MindNode_second_round.png)
 *The more finalized mind map*
