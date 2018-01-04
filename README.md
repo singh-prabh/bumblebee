@@ -22,4 +22,15 @@ Most of the time a new project is started with a simple idea, or even statement 
 ![MindNode near complete](images/MindNode_second_round.png)
 *The more finalized mind map*
 
+### Flowchart
+**What I use:**
 
+* [Sketch](https://www.sketchapp.com) - A great application with tons of plugins that can speedup the entire design process. I also like having the ability to have all of my icons, colors, and typography in one place. 
+* [Platforma Flowcharts](http://web.flowcharts.ws) - Available for web and mobile projects, these kits are great for creating clean and descriptive flowcharts
+
+I like to think of the Flowchart as a more detailed mind map, but a not so detailed UI Kit. As the name implies, the flowchart is geared towards working out the flow of the application based on how the user, or other parts of the app, can interact with each screen. 
+
+*due to licensing I can't actually share the elements that make up the flowchart, so I included a screenshot of the flowchart in the Sketch file*
+
+![Flowchart starting point](images/Platforma_flowchart.png)
+*Initial flowchart design*
