@@ -34,3 +34,15 @@ I like to think of the Flowchart as a more detailed mind map, but a not so detai
 
 ![Flowchart starting point](images/Platforma_flowchart.png)
 *Initial flowchart design*
+
+### UI Kit
+**What I use:**
+
+* [Sketch Swatches](https://github.com/Ashung/Sketch_Swatches) - Nice little plugin for Sketch with various color palettes. I tend to use the Material palette when working on cross platform projects
+* [Icons8](https://icons8.com) - Massive icon library with just about any format you would want. 
+* [Craft Plugin](https://www.invisionapp.com/craft) - The craft plugin from InVision offers some really nice tools, the one I like the best is there Data tool which can fill in labels with actual text instead of the normal *Lorum Ipsum* text. 
+
+Now this is where the power of Sketch really comes in handy and makes designing an application so much fun. With the override ability you can create symbols that work as placeholders and then with a few clicks change icons, colors, and typography much like a developer would do when creating UI elements. 
+
+![Sketch overrides](images/Sketch_override_example.png)
+*Overrides let you create reusable UI elements quickly*
