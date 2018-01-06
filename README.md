@@ -57,7 +57,7 @@ Now this usually isn't a required step to take during the process, but if you ha
 ![InVision home screen](images/InVision_inspector.png)
 *InVision's inspector area let's you pull colors and fonts for whatever platform you are developing on*
 
-### Da base Diagram
+### Database Diagram
 **What I use:**
 
 * [Navicat](https://www.navicat.com/en/products/navicat-premium) - The Premium version comes with a built in Data Modeler, but it's also pretty pricey when it comes to database tools. I've tried quite a few, keep coming back to Navicat so now I'm finding the best ways to use it. 
