@@ -30,5 +30,6 @@
       "passwordField": "password"
     }
   },
-  "nedb": "../data"
+  "nedb": "../data",
+  "postgres": "postgres://postgres:@localhost:5432/bumblebee_api"
 }
