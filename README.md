@@ -46,3 +46,24 @@ Now this is where the power of Sketch really comes in handy and makes designing 
 
 ![Sketch overrides](images/Sketch_override_example.png)
 *Overrides let you create reusable UI elements quickly*
+
+### Prototype
+**What I use:**
+
+* [InVision](https://www.invisionapp.com/) - Probably one of the easier prototyping tools I've used, and with the Craft plugin syncing from Sketch to InVision is done with just one click. 
+
+Now this usually isn't a required step to take during the process, but if you have the chance to do so or just want to go that extra mile then try turning the UI Kit into a prototype. There are a lot of other tools available for this ([Marvel](https://marvelapp.com), [Figma](https://www.figma.com) and [UXPin](https://www.uxpin.com/prototyping) to name a few) so really it boils down to personal preference. For InVision, just setup a project and then jump back to Sketch, tap on the Craft Sync button and that's it. Once uploaded you can add hotspots for the interactive elements (buttons, hyperlinks, etc) and then share a link with clients/colleagues who can add their comments as well. 
+
+![InVision home screen](images/InVision_inspector.png)
+*InVision's inspector area let's you pull colors and fonts for whatever platform you are developing on*
+
+### Database Diagram
+**What I use:**
+
+* [Navicat](https://www.navicat.com/en/products/navicat-premium) - The Premium version comes with a built in Data Modeler, but it's also pretty pricey when it comes to database tools. I've tried quite a few, keep coming back to Navicat so now I'm finding the best ways to use it. 
+* [PostgreSQL](https://www.postgresql.org) - It's a free, open source database system that is widely available on major hosting platforms. 
+
+Most of my experience in databases has been in the SQL world, so whenever I'm working on a project that doesn't have a choice yet I'll usually offer up PostgreSQL. I don't claim to know all the differences between MySQL, SQL Server, SQLite and PostgreSQL, but so far I've had nothing but good experiences with PostgreSQL on larger projects and MySQL for smaller projects. Even though this is a small project, going with PostgreSQL since it's open source and available on just about every hosting platform. One of my favorite features in Navicat is the ability for the modeler to export the diagram as a SQL statement that can then be used to create the tables when ready. 
+
+![Navicat model](images/Navicat_database_model.png)
+*Modeling in Navicat is really easy*
