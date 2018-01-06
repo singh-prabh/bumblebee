@@ -57,13 +57,39 @@ Now this usually isn't a required step to take during the process, but if you ha
 ![InVision home screen](images/InVision_inspector.png)
 *InVision's inspector area let's you pull colors and fonts for whatever platform you are developing on*
 
-### Database Diagram
+### Da base Diagram
 **What I use:**
 
 * [Navicat](https://www.navicat.com/en/products/navicat-premium) - The Premium version comes with a built in Data Modeler, but it's also pretty pricey when it comes to database tools. I've tried quite a few, keep coming back to Navicat so now I'm finding the best ways to use it. 
-* [PostgreSQL](https://www.postgresql.org) - It's a free, open source database system that is widely available on major hosting platforms. 
 
-Most of my experience in databases has been in the SQL world, so whenever I'm working on a project that doesn't have a choice yet I'll usually offer up PostgreSQL. I don't claim to know all the differences between MySQL, SQL Server, SQLite and PostgreSQL, but so far I've had nothing but good experiences with PostgreSQL on larger projects and MySQL for smaller projects. Even though this is a small project, going with PostgreSQL since it's open source and available on just about every hosting platform. One of my favorite features in Navicat is the ability for the modeler to export the diagram as a SQL statement that can then be used to create the tables when ready. 
+Most of my experience in databases has been in the SQL world, so whenever I'm working on a project that doesn't have a choice yet I'll usually offer up PostgreSQL. I don't claim to know all the differences between MySQL, SQL Server, SQLite and PostgreSQL, but so far I've had nothing but good experiences with PostgreSQL on larger projects and MySQL for smaller projects. Even though this is a small project we will be going with PostgreSQL since it's open source and available on just about every hosting platform when ready for production. One of my favorite features in Navicat is the ability for the modeler to export the diagram as a SQL statement that can then be used to create the tables when ready. 
 
 ![Navicat model](images/Navicat_database_model.png)
 *Modeling in Navicat is really easy*
+
+## Development
+With the design stage finished it's time to start getting some code done. As a native developer I prefer to use native languages for each platform instead of going the Xamarin or React route. Nothing against those platforms, or those who choose to use them, I just prefer to use native tools since it gives me more flexibility when working with clients that have existing products/teams. 
+
+### Database Setup
+**What I use:**
+
+* [Postgres.app](https://postgresapp.com) - A quick and easy way to get a PostgreSQL server setup locally.
+
+With the Database Diagram complete I usually segue right into setting up the database tables and fill in some of the tables with necessary data. There's not much that needs to be done for this step other than to get the Postgres app installed and running and then plug in the database information into Navicat and then I'm ready to start importing the tables from the diagram sql export. 
+
+### RESTful API 
+**What I use:**
+
+* [Visual Studio Code](https://code.visualstudio.com) - Super lightweight editor that can handle just about any programming language out there. I also really like the built in editor when working with JavaScript apps. 
+* [FeathersJS](https://feathersjs.com) - A newer framework based on Express that I recently started using. Needed to pick one for this guide and FeathersJS was the easiest one for me to get setup and running with minimal knowledge of JavaScript. 
+* [Postman](https://www.getpostman.com/postman) - An excellent tool for testing API's 
+
+There are a ton of frameworks for setting up a backend service that I'm not even going to bother trying to name them. Coming into this project I've worked with different frameworks that were already setup by another developer, but never had the chance to start one from scratch. As I tried out different frameworks and read article after article I realized why JavaScript developers are in high demand with many startups. I settled on FeathersJS only because I felt it provided me with just enough boiler code and modules that getting up and running only took few commands and that was it. To get started with a project all you need are these two lines:
+ 
+```terminal
+npm install -g @feathersjs/cli
+feathers generate app
+```
+
+![VSCode and Feathers](images/VSCode_getting_started.png)
+*The built in terminal keeps me from having to leave VSCode*
