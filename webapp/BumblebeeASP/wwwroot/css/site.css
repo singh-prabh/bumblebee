@@ -1,7 +1,155 @@
-﻿body {
+﻿:root {
+    --primaryBlueDark: #1565C0;
+    --grayBackground: #F2F2F2;
+    --grayBorderColor: #BDBDBD
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px
 }
+
+/*Error message*/
+.error-message {
+    font-family: Lato;
+    font-style: italic;
+    font-size: 16px;
+    color: red;
+    margin-top: 6px
+}
+
+/*Gradients*/
+.home-view {
+    background: linear-gradient(#2196F3, #1565C0);
+    background-repeat: no-repeat;
+    background-attachment: fixed
+}
+
+/*Logo*/
+.circle-logo {
+    background-image: url('circle_logo.svg');
+    text-align: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%)
+}
+
+    .circle-logo h1 {
+        color: white;
+        font-family: Lato;
+        font-size: 36px;
+        font-weight: bold;
+        line-height: 44px
+    }
+
+/*Forms*/
+.form-container {
+    background-color: white;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    width: 65%;
+    min-width: 350px;
+    text-align: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%)
+}
+
+    .form-container .vertical-divider {
+        border: 1px solid var(--grayBorderColor);
+        height: 80%;
+        position: relative;
+        margin-right: 10px;
+        margin-left: 10px
+    }
+
+    .form-container h2 {
+        font-family: Lato;
+        font-size: 36px;
+        line-height: 44px;
+        color: var(--primaryBlueDark);
+        margin-top: 16px;
+        margin-bottom: 16px;
+        display: inline-block
+    }
+
+    .form-container .input-container {
+        position: relative;
+        border-color: var(--grayBorderColor);
+        border-radius: 8px;
+        border-width: 2px;
+        border-style: solid;
+        width: 50%;
+        height: 48px;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 24px;
+        margin-top: 12px
+    }
+
+    .form-container input[type=text] {
+        height: 36px;
+        border-color: transparent;
+        margin-top: 2px;
+        margin-bottom: 12px;
+        font-family: Lato;
+        font-size: 20px
+    }
+
+    .form-container input[type=password] {
+        margin-top: 2px;
+        margin-bottom: 8px;
+        height: 36px;
+        border-color: transparent;
+        font-family: Lato;
+        font-size: 20px
+    }
+
+    .form-container input[type=submit] {
+        margin-top: 16px;
+        margin-bottom: 12px;
+        color: white;
+        border: none;
+        background-color: var(--primaryBlueDark);
+        width: 50%;
+        height: 44px;
+        border-radius: 8px;
+        font-family: Lato;
+        font-size: 24px
+    }
+
+    .form-container .fa {
+        position: relative;
+        color: var(--primaryBlueDark);
+        vertical-align: middle;
+        left: 0
+    }
+
+.form-footer {
+    background-color: var(--grayBackground);
+    width: 65%;
+    height: 60px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    text-align: center
+}
+
+.footer-link {
+    text-align: center
+}
+
+    .footer-link a {
+        color: white;
+        text-decoration: underline;
+        text-decoration-color: white;
+        margin-top: 8px;
+        font-family: Lato;
+        font-size: 24px;
+        display: inline-block
+    }
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
