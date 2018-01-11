@@ -6,9 +6,17 @@ const DataTypes = Sequelize.DataTypes;
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
   const person = sequelizeClient.define('person', {
-    text: {
-      type: DataTypes.STRING,
-      allowNull: false
+    firstName: {
+      type: DataTypes.STRING
+    },
+    lastName: {
+      type: DataTypes.STRING
+    },
+    companyID: {
+      type: DataTypes.INTEGER
+    }, 
+    email: {
+      type: DataTypes.STRING
     }
   }, {
     hooks: {
