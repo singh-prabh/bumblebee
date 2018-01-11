@@ -44,6 +44,8 @@ namespace BumblebeeASP
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            //load environment file
+            DotNetEnv.Env.Load();
         }
     }
 }
