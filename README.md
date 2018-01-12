@@ -93,3 +93,13 @@ feathers generate app
 
 ![VSCode and Feathers](images/VSCode_getting_started.png)
 *The built in terminal keeps me from having to leave VSCode*
+
+### Web Application
+**What I use:**
+
+* [Visual Studio(Mac)](https://www.visualstudio.com/vs/visual-studio-mac/) - I was super excited when MS released the Visual Studio for Mac since it meant I didn't have to load a VM when I wanted to work on .NET project. 
+
+I opted to go with a ASP.NET MVC application for this project since I wanted to sharpen up my C# and .NET skills instead of just going with a pure JavaScript approach on the back and front ends. Nothing wrong with JavaScript, and I may take a stab at a JS version later but since most of the enterprise applications are still in the .NET stack it made more sense to stick with what's more widely used at this time. 
+
+![Visual Studio](images/VisualStudio_new_project.png)
+*Visual Studio for Mac, a great port that actually works*
