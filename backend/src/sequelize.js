@@ -7,6 +7,7 @@ module.exports = function (app) {
     port: process.env.PGPORT,
     dialect: 'postgres',
     logging: false, 
+    operatorsAliases: Sequelize.Op,
     define: {
       freezeTableName: true
     }
