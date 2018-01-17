@@ -6,11 +6,15 @@ namespace BumblebeeASP.Models
     public class LoginModel
     {
         [Required(ErrorMessage = "Email address is required")]
+        [EmailAddress(ErrorMessage = "Invalid email address")]
         [Display(Prompt = "email address")]
-        public string emailAddress { get; set; }
+        public string LoginEmail { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
         [Display(Prompt = "password")]
-        public string password { get; set; }
+        public string LoginPassword { get; set; }
+
+
+        public string ErrorMessage { get; set; }
     }
 }

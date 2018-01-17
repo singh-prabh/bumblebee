@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using BumblebeeASP.Models;
+using BumblebeeASP.Helpers;
 
 namespace BumblebeeASP
 {
@@ -46,6 +48,8 @@ namespace BumblebeeASP
             });
             //load environment file
             DotNetEnv.Env.Load();
+            //setup API Helper
+            APIHelper.SetupAPIHelper();
         }
     }
 }

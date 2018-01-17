@@ -5,46 +5,44 @@
 
 <html class="home-view">
     <body class="home-view">
-    <div class="circle-logo">
-        <img src="images/Circle_Logo.svg"/>
-        <h1>Bumblebee</h1>
-    </div>
-<div>
-
-            @using (Html.BeginForm("Index", "Home")){
-<div class="form-container">
-                <fieldset>
+        <div class="circle-logo">
+            <img src="images/Circle_Logo.svg"/>
+            <h1>Bumblebee</h1>
+        </div>
+        @using(Html.BeginForm("Index", "Home"))
+        {
+        <div class="form-container">
+            <fieldset>
                 <h2>Log in to your account</h2>
-                    <div class="input-container"> 
+                <br/>
+                <p class="error-box">@ViewBag.ErrorMessage</p>
+                <p class="success-box">@ViewBag.SuccessMessage</p>
+                <br/>
+                <div class="input-container">
                     <span class="fa fa-envelope fa-2x"></span>
                     <span class="vertical-divider"></span>
-                    <!-- <input type="text" name="EmailInput" value="" placeholder="email address"/> -->
-                    @Html.TextBoxFor(x => x.emailAddress)
-                        <br/>
-                    @Html.ValidationMessageFor(x => x.emailAddress, "", new {@class = "error-message"})
-                    </div>
-                    <div class="input-container">
-                        <span class="fa fa-unlock-alt fa-2x"></span>
-                        <span class="vertical-divider"></span>
-                   <!-- <input type="password" name="PasswordInput" value="" placeholder="password"/> -->
-                        @Html.PasswordFor(x => x.password, new {@class = "textBox"})
-                        <br/>
-                        @Html.ValidationMessageFor(x => x.password, "", new { @class = "error-message"})
-                        
-                        </div>
-
-                    <input type="submit" value="Log In" id="loginButton"/>
+                    @Html.TextBoxFor(x => x.LoginEmail)
                     <br/>
-                    </fieldset>
+                    @Html.ValidationMessageFor(x => x.LoginEmail, "", new {@class = "error-message"})
+                </div>
+                <div class="input-container">
+                    <span class="fa fa-unlock-alt fa-2x"></span>
+                    <span class="vertical-divider"></span>
+                    @Html.PasswordFor(x => x.LoginPassword)
+                    <br/>
+                    @Html.ValidationMessageFor(x => x.LoginPassword, "", new {@class = "error-message"})
+                </div>
+                <input type="submit" value="Log In" id="loginButton"/>
+                <br/>
+            </fieldset>
         </div>
-            }
-            <div class="form-footer">
-                <label>New to Bumblebee?</label>
-                <label>Sign Up</label>
-            </div>
-            <div class="footer-link">
+        }
+        <div class="form-footer">
+            <label>New to Bumblebee?</label>
+            <a asp-area="" asp-controller="Home" asp-action="Register">Sign Up</a>
+        </div>
+        <div class="footer-link">
             <a asp-area="" asp-controller="Home" asp-action="Forgot">Forgot Password?</a>
-            </div>
-</div>
-        </body>
+        </div>
+    </body>
 </html>
