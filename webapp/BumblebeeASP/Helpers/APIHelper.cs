@@ -31,6 +31,9 @@ namespace BumblebeeASP.Helpers
         //rest client
         static RestClient RestClient { get; set; }
 
+        //person model
+        public static PersonModel MainPerson { get; set; }
+
         //setup the rest client
         public static void SetupAPIHelper()
         {
@@ -96,6 +99,8 @@ namespace BumblebeeASP.Helpers
                 string content = AuthResponse.Data.accessToken;
                 ClientToken = content;
                 TokenResponse = content;
+                //add token
+                RestClient.Authenticator = new JwtAuthenticator(ClientToken);
                 PrinterClass.printDebugMessage("new token created and saved: " + ClientToken);
             }
             return TokenResponse;
@@ -154,8 +159,6 @@ namespace BumblebeeASP.Helpers
             //setup the request to check the user table
             RestRequest GetPersonRequest = new RestRequest("/person" + queryString, Method.GET);
             GetPersonRequest.RequestFormat = DataFormat.Json;
-            //add token
-            RestClient.Authenticator = new JwtAuthenticator(ClientToken);
             //get list
             var PersonResponse = RestClient.Execute<List<PersonModel>>(GetPersonRequest);
             //check the status
@@ -163,11 +166,79 @@ namespace BumblebeeASP.Helpers
             if (statuscode == OKCode)
             {
                 PersonModel person = PersonResponse.Data[0];
+                MainPerson = person;
                 return person;
             }
             PersonModel ErrorPerson = new PersonModel();
             ErrorPerson.PersonID = 0;
             return ErrorPerson;
+        }
+
+        //states list for dropdowns
+        public static List<StatesModel> GetStateList()
+        {
+            //setup the request
+            RestRequest GetStatesRequest = new RestRequest("/states", Method.GET);
+            GetStatesRequest.RequestFormat = DataFormat.Json;
+            //get list
+            var StatesResponse = RestClient.Execute<List<StatesModel>>(GetStatesRequest);
+            //get status code
+            if (StatesResponse.StatusCode == OKCode)
+            {
+                return StatesResponse.Data;
+            }
+            return null;
+        }
+
+        //save company for person
+        public static bool SaveCompanyForPerson(CompanyModel companyModel)
+        {
+            //first save company in database
+            RestRequest PostCompanyRequest = new RestRequest("/company", Method.POST);
+            PostCompanyRequest.RequestFormat = DataFormat.Json;
+            PostCompanyRequest.AddParameter("name", companyModel.CompanyName);
+            PostCompanyRequest.AddParameter("website", companyModel.CompanyURL);
+            //post comany data
+            var CompanyResponse = RestClient.Execute<CompanyModel>(PostCompanyRequest);
+            //check status
+            var status = CompanyResponse.StatusCode;
+            if (CompanyResponse.StatusCode == CreatedCode)
+            {
+                //get the company id from the response
+                CompanyModel createdCompany = CompanyResponse.Data;
+                int companyID = createdCompany.CompanyID;
+                //add the address 
+                RestRequest PostAddressRequest = new RestRequest("/address", Method.POST);
+                PostAddressRequest.RequestFormat = DataFormat.Json;
+                PostAddressRequest.AddParameter("companyID", companyID);
+                PostAddressRequest.AddParameter("street1", companyModel.CompanyStreet1);
+                PostAddressRequest.AddParameter("street2", companyModel.CompanyStreet2);
+                PostAddressRequest.AddParameter("city", companyModel.CompanyCity);
+                PostAddressRequest.AddParameter("zip", companyModel.CompanyZip);
+                PostAddressRequest.AddParameter("stateID", companyModel.CompanyState);
+                PostAddressRequest.AddParameter("typeID", 2);
+                RestClient.Execute(PostAddressRequest);
+                //add the phone
+                RestRequest PostPhoneRequest = new RestRequest("/phone", Method.POST);
+                PostPhoneRequest.RequestFormat = DataFormat.Json;
+                PostPhoneRequest.AddParameter("companyID", companyID);
+                //fix phone number
+                string newNumber = companyModel.CompanyPhone.Replace("-", "");
+                PostPhoneRequest.AddParameter("number", newNumber);
+                PostPhoneRequest.AddParameter("typeID", 2);
+                RestClient.Execute(PostPhoneRequest);
+                //update person with company
+                RestRequest UpdatePersonRequest = new RestRequest("/person/" + MainPerson.PersonID, Method.PUT);
+                UpdatePersonRequest.AddParameter("firstName", MainPerson.FirstName);
+                UpdatePersonRequest.AddParameter("lastName", MainPerson.LastName);
+                UpdatePersonRequest.AddParameter("companyID", companyID);
+                UpdatePersonRequest.AddParameter("email", MainPerson.PersonEmail);
+                UpdatePersonRequest.AddParameter("finishedOnboarding", true);
+                RestClient.Execute(UpdatePersonRequest);
+                //add done
+                return true;
+            }
+            return false;
         }
     }
 }

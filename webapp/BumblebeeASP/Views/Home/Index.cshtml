@@ -19,14 +19,14 @@
                 <p class="success-box">@ViewBag.SuccessMessage</p>
                 <br/>
                 <div class="input-container">
-                    <span class="fa fa-envelope fa-2x"></span>
+                    <span class="fa fa-envelope"></span>
                     <span class="vertical-divider"></span>
                     @Html.TextBoxFor(x => x.LoginEmail)
                     <br/>
                     @Html.ValidationMessageFor(x => x.LoginEmail, "", new {@class = "error-message"})
                 </div>
                 <div class="input-container">
-                    <span class="fa fa-unlock-alt fa-2x"></span>
+                    <span class="fa fa-unlock-alt"></span>
                     <span class="vertical-divider"></span>
                     @Html.PasswordFor(x => x.LoginPassword)
                     <br/>

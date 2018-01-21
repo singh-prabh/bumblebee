@@ -70,7 +70,34 @@ body {
         margin-top: 8px;
         margin-bottom: 12px;
     }
-
+/*Headers*/
+.hello-user {
+    text-align: center;
+    color: white;
+    font-family: Lato;
+    font-style:normal;
+    line-height: 72px;
+    font-weight: bold;
+    font-size: 48px;
+}
+.hello-message {
+    text-align: center;
+    color: white;
+    font-family: Lato;
+    font-style: normal;
+    font-size: 26px;
+    line-height: 36px;
+}
+.hello-hint {
+    text-align: center;
+    color: white;
+    font-family: Lato;
+    font-style: italic;
+    font-weight: lighter;
+    font-size: 22px;
+    line-height: 32px;
+    width: 100%;
+}
 /*Forms*/
 .form-container {
     background-color: white;
@@ -83,7 +110,18 @@ body {
     left: 50%;
     transform: translateX(-50%)
 }
+    .form-container .section-header {
+        margin-top: 8px;
+        left: 0;
+        color: var(--primaryBlueDark);
+        height: 44px;
+        line-height: 44px;
+        width: 250px;
+        font-family: Lato;
+        font-style: normal;
+        font-size: 26px;
 
+    }
     .form-container .vertical-divider {
         border: 1px solid var(--grayBorderColor);
         height: 80%;
@@ -105,7 +143,6 @@ body {
     .form-container .input-container {
         position: relative;
         border-color: var(--grayBorderColor);
-        border-radius: 8px;
         border-width: 2px;
         border-style: solid;
         width: 50%;
@@ -130,10 +167,82 @@ body {
     }
 
     .form-container input[type=text] {
-        height: 36px;
+        height: 90%;
+        width: 70%;
         border-color: transparent;
         margin-top: 2px;
         margin-bottom: 12px;
+        font-family: Lato;
+        font-size: 20px;
+    }
+
+    .form-container .input-full {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 2px;
+        margin-bottom: 12px;
+        height: 48px;
+        width: 80%;
+        border-style: solid;
+        border-width: 2px;
+        border-color: var(--grayBorderColor)
+    }
+    .form-container .input-half-center {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 48px;
+        width: 40%;
+        border-style: solid;
+        border-width: 2px;
+        border-color: var(--grayBorderColor)
+    }
+
+    .form-container .input-half-left {
+        position: relative;
+        height: 48px;
+        width: 40%;
+        border-style: solid;
+        border-width: 2px;
+        border-color: var(--grayBorderColor);
+        margin-left: 60px;
+        margin-top: 2px;
+        margin-bottom: 18px;
+        float: left;
+    }
+
+    .form-container .input-half-right {
+        position: relative;
+        height: 48px;
+        width: 30%;
+        margin-right: 60px;
+        margin-top: 2px;
+        margin-bottom: 18px;
+        float: right;
+    }
+
+
+        .form-container .input-full input[type=text] {
+            height: 90%;
+            width: 95%;
+            border-color: transparent;
+            font-family: Lato;
+            font-size: 20px
+        }
+
+    .form-container .input-half-left input[type=text] {
+        height: 90%;
+        width: 95%;
+        border-color: transparent;
+        font-family: Lato;
+        font-size: 20px
+    }
+
+    .form-container .input-full input[type=password] {
+        height: 90%;
+        width: 95%;
+        border-color: transparent;
         font-family: Lato;
         font-size: 20px
     }
@@ -141,7 +250,8 @@ body {
     .form-container input[type=password] {
         margin-top: 2px;
         margin-bottom: 8px;
-        height: 36px;
+        height: 90%;
+        width: 70%;
         border-color: transparent;
         font-family: Lato;
         font-size: 20px
@@ -155,7 +265,6 @@ body {
         background-color: var(--primaryBlueDark);
         width: 50%;
         height: 44px;
-        border-radius: 8px;
         font-family: Lato;
         font-size: 24px
     }
@@ -165,6 +274,28 @@ body {
         color: var(--primaryBlueDark);
         vertical-align: middle;
         left: 0
+    }
+.form-footer-white {
+    background-color: white;
+    width: 65%;
+    height: 80px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    text-align: center;
+}
+    .form-footer-white input[type=submit] {
+        margin-top: 16px;
+        margin-bottom: 12px;
+        color: white;
+        border: none;
+        background-color: var(--primaryBlueDark);
+        width: 50%;
+        height: 44px;
+        font-family: Lato;
+        font-size: 24px
     }
 
 .form-footer {

@@ -15,12 +15,12 @@ namespace BumblebeeASP.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return View();
+            return View("~/Views/Home/Register.cshtml");
         }
 
-        [Route("Home/Register")]
+        [Route("Register")]
         [HttpPost]
-        public ActionResult Index(RegisterModel registerModel)
+        public ActionResult SaveUser(RegisterModel registerModel)
         {
             PrinterClass.printDebugMessage("create button pressed on register page");
             if (ModelState.IsValid)

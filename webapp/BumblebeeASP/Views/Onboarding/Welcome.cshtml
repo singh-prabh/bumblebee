@@ -1,13 +1,69 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model BumblebeeASP.Models.CompanyModel
 @{
     ViewData["Title"] = "Welcome";
 }
 
 <html class="home-view">
     <body class="home-view">
-        <h1>Hello @ViewData["FirstName"]</h1>
-        <p>Nice to have you here, let's take a moment to get you all setup'</p>
+        <h1 class="hello-user">Hello, @ViewData["FirstName"]</h1>
+        <label class="hello-message">Nice to have you here, let's take a moment to get you all setup by adding your company information</label>
+        <label class="hello-hint">(This is what shows up on your invoices)</label>
+        @using(Html.BeginForm("SaveData", "Welcome"))
+        {
+        <div class="form-container">
+            <fieldset>
+                <label class="section-header">Company Info</label>
+                <div class="input-full">
+                    @Html.TextBoxFor(x => x.CompanyName)
+                </div>
+                @Html.ValidationMessageFor(x => x.CompanyName, "", new {@class = "error-message"})
+                <br/>
+                <div class="input-full">
+                    @Html.TextBoxFor(x => x.CompanyURL)
+                </div>
+                @Html.ValidationMessageFor(x => x.CompanyURL, "", new {@class = "error-message"})
+                <br/>
+                <div class="input-full">
+                    @Html.TextBoxFor(x => x.CompanyPhone)
+                </div>
+                @Html.ValidationMessageFor(x => x.CompanyPhone, "", new {@class = "error-message"})
+                <br/>
+                <label class="section-header">Address</label>
+                <div class="input-full">
+                    @Html.TextBoxFor(x => x.CompanyStreet1)
+                </div>
+                @Html.ValidationMessageFor(x => x.CompanyStreet1, "", new {@class = "error-message"})
+                <br/>
+                <div class="input-full">
+                    @Html.TextBoxFor(x => x.CompanyStreet2)
+                </div>
+                <br/>
+                <div>
+                    <div class="input-half-left">
+                        @Html.TextBoxFor(x => x.CompanyCity)
+                        <br/>
+                        @Html.ValidationMessageFor(x => x.CompanyCity, "", new {@class = "error-message"})
+                    </div>
+                    <div class="input-half-right">
+                        @Html.DropDownListFor(x => x.CompanyState, (SelectList)ViewBag.StateList, "Select State", new {@class = "form-control"})
+                        <br/>
+                        @Html.ValidationMessageFor(x => x.CompanyState, "", new {@class = "error-message"})
+                    </div>
+                    <div style="clear:both; font-size:1px;"></div>
+                </div>
+                <br/>
+                <div class="input-full">
+                    @Html.TextBoxFor(x => x.CompanyZip)
+                    <br/>
+                    @Html.ValidationMessageFor(x => x.CompanyZip, "", new {@class = "error-message"})
+                </div>
+                <br/>  
+            </fieldset>
+        </div>
+        <div class="form-footer-white">
+            <input type="submit" value="Save" id="OnboardingSaveButton"/>
+            <br/>
+        </div>
+        }
     </body>
 </html>

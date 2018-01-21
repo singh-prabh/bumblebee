@@ -12,7 +12,7 @@
             <img src="~/images/Circle_Logo.svg"/>
             <h1>Bumblebee</h1>
         </div>
-        @using(Html.BeginForm("Index", "Register"))
+        @using(Html.BeginForm("SaveUser", "Register"))
         {
         <div class="form-container">
             <fieldset>
@@ -20,26 +20,23 @@
                 <br/>
                 <p class="error-box">@ViewBag.ErrorMessage</p>
                 <br/>
-                <div class="input-container">
+                <div class="input-full">
                     @Html.TextBoxFor(x => x.FirstName)
-                    <br/>
-                    @Html.ValidationMessageFor(x => x.FirstName, "", new {@class = "error-message"})
                 </div>
-                <div class="input-container">
+                @Html.ValidationMessageFor(x => x.FirstName, "", new {@class = "error-message"})
+                <div class="input-full">
                     @Html.TextBoxFor(x => x.LastName)
-                    <br/>
-                    @Html.ValidationMessageFor(x => x.LastName, "", new {@class = "error-message"})
                 </div>
-                <div class="input-container">
+                @Html.ValidationMessageFor(x => x.LastName, "", new {@class = "error-message"})
+                <div class="input-full">
                     @Html.TextBoxFor(x => x.UserEmail)
-                    <br/>
-                    @Html.ValidationMessageFor(x => x.UserEmail, "", new {@class = "error-message"})
                 </div>
-                <div class="input-container">
+                @Html.ValidationMessageFor(x => x.UserEmail, "", new {@class = "error-message"})
+                <div class="input-full">
                     @Html.PasswordFor(x => x.UserPassword)
-                    <br/>
-                    @Html.ValidationMessageFor(x => x.UserPassword, "", new {@class = "error-message"})
                 </div>
+                @Html.ValidationMessageFor(x => x.UserPassword, "", new {@class = "error-message"})
+                <br/>
                 <input type="submit" value="Create Account" id="registerButton"/>
                 <br/>
             </fieldset>
@@ -47,6 +44,7 @@
         }
         <div class="form-footer">
             <label>Already have an account?</label>
+            <a asp-area="" asp-controller="Home" asp-action="Index">Sign In</a>
         </div>
     </body>
 </html>

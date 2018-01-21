@@ -65,12 +65,12 @@ namespace BumblebeeASP.Controllers
                     if (Person.FinishedOnboarding == false)
                     {
                         //go to onboarding
-                        TempData.Put("personModel", Person);
-                        return RedirectToAction("FirstRun", controllerName: "Welcome");
+                        return RedirectToAction("Index", controllerName: "Welcome");
                     }
                     else
                     {
                         //go to dashboard
+                        return RedirectToAction("Index", controllerName: "Dashboard");
                     }
                 }
             }
