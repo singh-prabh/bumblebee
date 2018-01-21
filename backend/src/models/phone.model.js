@@ -5,21 +5,24 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const person = sequelizeClient.define('person', {
-    firstName: {
-      type: DataTypes.STRING
-    },
-    lastName: {
-      type: DataTypes.STRING
+  const phone = sequelizeClient.define('phone', {
+    personID: {
+      type: DataTypes. INTEGER
     },
     companyID: {
       type: DataTypes.INTEGER
-    }, 
-    email: {
-      type: DataTypes.STRING
     },
-    finishedOnboarding: {
-      type: DataTypes.BOOLEAN
+    number: {
+      type: DataTypes.INTEGER
+    },
+    typeID: {
+      type: DataTypes.INTEGER
+    },
+    createdAt: {
+      type: DataTypes.DATE
+    },
+    updatedAt: {
+      type: DataTypes.DATE
     }
   }, {
     hooks: {
@@ -29,10 +32,10 @@ module.exports = function (app) {
     }
   });
 
-  person.associate = function (models) { // eslint-disable-line no-unused-vars
+  phone.associate = function (models) { // eslint-disable-line no-unused-vars
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
   };
 
-  return person;
+  return phone;
 };

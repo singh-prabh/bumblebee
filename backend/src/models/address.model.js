@@ -5,21 +5,36 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const person = sequelizeClient.define('person', {
-    firstName: {
-      type: DataTypes.STRING
-    },
-    lastName: {
-      type: DataTypes.STRING
-    },
+  const address = sequelizeClient.define('address', {
+    personID: {
+      type: DataTypes.INTEGER
+    }, 
     companyID: {
       type: DataTypes.INTEGER
     }, 
-    email: {
+    street1: {
+      type: DataTypes.STRING  
+    }, 
+    street2: {
       type: DataTypes.STRING
+    }, 
+    city: {
+      type: DataTypes. STRING
     },
-    finishedOnboarding: {
-      type: DataTypes.BOOLEAN
+    zip: {
+      type: DataTypes.STRING
+    }, 
+    stateID: {
+      type: DataTypes.INTEGER
+    },
+    typeID: {
+      type: DataTypes.INTEGER
+    }, 
+    createdAt: {
+      type: DataTypes.DATE
+    },
+    updatedAt: {
+      type: DataTypes.DATE
     }
   }, {
     hooks: {
@@ -29,10 +44,10 @@ module.exports = function (app) {
     }
   });
 
-  person.associate = function (models) { // eslint-disable-line no-unused-vars
+  address.associate = function (models) { // eslint-disable-line no-unused-vars
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
   };
 
-  return person;
+  return address;
 };
