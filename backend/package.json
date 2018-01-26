@@ -28,15 +28,15 @@
     "mocha": "mocha test/ --recursive --exit"
   },
   "dependencies": {
-    "@feathersjs/authentication": "^2.1.0",
-    "@feathersjs/authentication-jwt": "^1.0.1",
-    "@feathersjs/authentication-local": "^1.0.2",
+    "@feathersjs/authentication": "^2.1.1",
+    "@feathersjs/authentication-jwt": "^1.0.2",
+    "@feathersjs/authentication-local": "^1.0.4",
     "@feathersjs/cli": "^3.5.0",
-    "@feathersjs/configuration": "^1.0.1",
-    "@feathersjs/errors": "^3.2.0",
+    "@feathersjs/configuration": "^1.0.2",
+    "@feathersjs/errors": "^3.2.1",
     "@feathersjs/express": "^1.1.2",
-    "@feathersjs/feathers": "^3.0.2",
-    "@feathersjs/socketio": "^3.0.1",
+    "@feathersjs/feathers": "^3.0.5",
+    "@feathersjs/socketio": "^3.0.2",
     "babel-preset-env": "^1.6.1",
     "compression": "^1.7.1",
     "cors": "^2.8.4",
@@ -48,13 +48,13 @@
     "nedb": "^1.8.0",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.29.0",
+    "sequelize": "^4.31.2",
     "serve-favicon": "^2.4.5",
     "winston": "^2.4.0"
   },
   "devDependencies": {
-    "eslint": "^4.13.1",
-    "mocha": "^4.0.1",
+    "eslint": "^4.16.0",
+    "mocha": "^4.1.0",
     "request": "^2.83.0",
     "request-promise": "^4.2.2"
   }

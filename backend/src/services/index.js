@@ -4,6 +4,7 @@ const company = require('./company/company.service.js');
 const states = require('./states/states.service.js');
 const address = require('./address/address.service.js');
 const phone = require('./phone/phone.service.js');
+const project = require('./project/project.service.js');
 module.exports = function (app) {
   app.configure(users);
   app.configure(person);
@@ -11,4 +12,5 @@ module.exports = function (app) {
   app.configure(states);
   app.configure(address);
   app.configure(phone);
+  app.configure(project);
 };

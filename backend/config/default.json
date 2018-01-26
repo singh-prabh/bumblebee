@@ -18,9 +18,9 @@
       "header": {
         "typ": "access"
       },
-      "audience": "https://yourdomain.com",
-      "subject": "anonymous",
-      "issuer": "feathers",
+      "audience": "http://level3studios.net",
+      "subject": "BumblebeeAPI",
+      "issuer": "https://feathersjs.com",
       "algorithm": "HS256",
       "expiresIn": "1d"
     },
