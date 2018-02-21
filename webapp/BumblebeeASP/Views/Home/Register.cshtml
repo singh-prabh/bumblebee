@@ -8,41 +8,52 @@
 
 <html class="home-view">
     <body class="home-view">
-        <div class="circle-logo">
-            <img src="~/images/Circle_Logo.svg"/>
+        <div class="container logo-container">
+            <img src="~/images/circle_logo.svg" />
             <h1>Bumblebee</h1>
         </div>
-        @using(Html.BeginForm("SaveUser", "Register"))
-        {
-        <div class="form-container">
-            <fieldset>
-                <h2>Register a new account</h2>
-                <br/>
-                <p class="error-box">@ViewBag.ErrorMessage</p>
-                <br/>
-                <div class="input-full">
-                    @Html.TextBoxFor(x => x.FirstName)
+        <div class="container form-container">
+            <h2>Register a new account</h2>
+            <br/>
+            <p class="error-box">@ViewBag.ErrorMessage</p>
+            <br/>
+            @using(Html.BeginForm("SaveUser", "Register"))
+            {
+            <div class="form-group">
+                @Html.LabelFor(x => x.FirstName)
+                <div class="input-group md-3">
+                    @Html.TextBoxFor(x => x.FirstName, new{@class="form-control"})
                 </div>
                 @Html.ValidationMessageFor(x => x.FirstName, "", new {@class = "error-message"})
-                <div class="input-full">
-                    @Html.TextBoxFor(x => x.LastName)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.LastName)
+                <div class="input-group md-3">
+                    @Html.TextBoxFor(x => x.LastName, new{@class="form-control"})
                 </div>
                 @Html.ValidationMessageFor(x => x.LastName, "", new {@class = "error-message"})
-                <div class="input-full">
-                    @Html.TextBoxFor(x => x.UserEmail)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.UserEmail)
+                <div class="input-group md-3">
+                    @Html.TextBoxFor(x => x.UserEmail, new{@class="form-control"})
                 </div>
                 @Html.ValidationMessageFor(x => x.UserEmail, "", new {@class = "error-message"})
-                <div class="input-full">
-                    @Html.PasswordFor(x => x.UserPassword)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.UserPassword)
+                <div class="input-group md-3">
+                    @Html.PasswordFor(x => x.UserPassword, new{@class="form-control"})
                 </div>
                 @Html.ValidationMessageFor(x => x.UserPassword, "", new {@class = "error-message"})
-                <br/>
-                <input type="submit" value="Create Account" id="registerButton"/>
-                <br/>
-            </fieldset>
+            </div>
+
+            <br/>
+            <input class="btn btn-primary-blue btn-block" type="submit" value="Create Account" id="registerButton"/>
+            <br/>
+            }
         </div>
-        }
-        <div class="form-footer">
+        <div class="container form-footer">
             <label>Already have an account?</label>
             <a asp-area="" asp-controller="Home" asp-action="Index">Sign In</a>
         </div>

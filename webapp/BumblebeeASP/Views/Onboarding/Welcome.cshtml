@@ -1,69 +1,83 @@
-﻿@model BumblebeeASP.Models.CompanyModel
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model BumblebeeASP.Models.CompanyModel
 @{
     ViewData["Title"] = "Welcome";
 }
 
 <html class="home-view">
     <body class="home-view">
-        <h1 class="hello-user">Hello, @ViewData["FirstName"]</h1>
-        <label class="hello-message">Nice to have you here, let's take a moment to get you all setup by adding your company information</label>
-        <label class="hello-hint">(This is what shows up on your invoices)</label>
-        @using(Html.BeginForm("SaveData", "Welcome"))
-        {
-        <div class="form-container">
-            <fieldset>
-                <label class="section-header">Company Info</label>
-                <div class="input-full">
-                    @Html.TextBoxFor(x => x.CompanyName)
+        <div class="container form-header-container">
+            <h1>Hello, @ViewData["UserName"]</h1>
+            <label class="hello-message">Nice to have you here, let's take a moment to get you all setup by adding your company information</label>
+            <label class="tip">(This is what shows up on your invoices)</label>
+        </div>
+         @using(Html.BeginForm("SaveData", "Welcome"))
+            {
+            <div class="container form-container">
+            <h3>Company Info</h3>
+            <div class="form-group">
+                @Html.LabelFor(x => x.CompanyName)
+                <div class="input-group md-3">
+                    @Html.TextBoxFor(x => x.CompanyName, new{@class="form-control"})
                 </div>
                 @Html.ValidationMessageFor(x => x.CompanyName, "", new {@class = "error-message"})
-                <br/>
-                <div class="input-full">
-                    @Html.TextBoxFor(x => x.CompanyURL)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.CompanyURL)
+                <div class="input-group md-3">
+                    @Html.TextBoxFor(x => x.CompanyURL, new{@class="form-control"})
                 </div>
                 @Html.ValidationMessageFor(x => x.CompanyURL, "", new {@class = "error-message"})
-                <br/>
-                <div class="input-full">
-                    @Html.TextBoxFor(x => x.CompanyPhone)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.CompanyPhone)
+                <div class="input-group md-3">
+                    @Html.TextBoxFor(x => x.CompanyPhone, new{@class="form-control"})
                 </div>
                 @Html.ValidationMessageFor(x => x.CompanyPhone, "", new {@class = "error-message"})
-                <br/>
-                <label class="section-header">Address</label>
-                <div class="input-full">
-                    @Html.TextBoxFor(x => x.CompanyStreet1)
+            </div>
+            <h3>Address</h3>
+            <div class="form-group">
+                <div class="input-group md-3">
+                    @Html.TextBoxFor(x => x.CompanyStreet1, new{@class="form-control"})
                 </div>
                 @Html.ValidationMessageFor(x => x.CompanyStreet1, "", new {@class = "error-message"})
-                <br/>
-                <div class="input-full">
-                    @Html.TextBoxFor(x => x.CompanyStreet2)
+            </div>
+            <div class="form-group">
+                <div class="input-group md-3">
+                    @Html.TextBoxFor(x => x.CompanyStreet2, new{@class="form-control"})
                 </div>
-                <br/>
-                <div>
-                    <div class="input-half-left">
-                        @Html.TextBoxFor(x => x.CompanyCity)
-                        <br/>
-                        @Html.ValidationMessageFor(x => x.CompanyCity, "", new {@class = "error-message"})
+            </div>
+            <br/>   
+            <div class="row">
+                <div class="col">
+                    <div class="input-group md-3">
+                    @Html.TextBoxFor(x => x.CompanyCity, new{@class="form-control"})
                     </div>
-                    <div class="input-half-right">
+                    @Html.ValidationMessageFor(x => x.CompanyCity, "", new {@class = "error-message"})
+                </div>
+                <div class="col">
+                    <div class="input-group md-3">
                         @Html.DropDownListFor(x => x.CompanyState, (SelectList)ViewBag.StateList, "Select State", new {@class = "form-control"})
-                        <br/>
-                        @Html.ValidationMessageFor(x => x.CompanyState, "", new {@class = "error-message"})
                     </div>
-                    <div style="clear:both; font-size:1px;"></div>
+                    @Html.ValidationMessageFor(x => x.CompanyState, "", new {@class = "error-message"})
                 </div>
-                <br/>
-                <div class="input-full">
-                    @Html.TextBoxFor(x => x.CompanyZip)
-                    <br/>
-                    @Html.ValidationMessageFor(x => x.CompanyZip, "", new {@class = "error-message"})
-                </div>
-                <br/>  
-            </fieldset>
-        </div>
-        <div class="form-footer-white">
-            <input type="submit" value="Save" id="OnboardingSaveButton"/>
+            </div>
             <br/>
-        </div>
-        }
+            <div class="form-group">
+                <div class="input-group md-3">
+                    @Html.TextBoxFor(x => x.CompanyZip, new{@class="form-control"})
+                </div>
+                @Html.ValidationMessageFor(x => x.CompanyZip, "", new {@class = "error-message"})
+            </div>
+            <br/>
+            </div>
+            <div class="container form-footer-white">
+                <input class="btn btn-primary-blue btn-block" type="submit" value="Save" id="OnboardingSaveButton"/>
+                <br/>
+            </div>
+            }
     </body>
 </html>

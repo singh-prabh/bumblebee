@@ -1,0 +1,121 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model BumblebeeASP.Models.ProjectModel
+@{
+}
+
+<div class="container">
+@using(Html.BeginForm("SaveProject", "NewProject", FormMethod.Post, new{id="NewProjectForm"}))
+{
+    <div class="form-group">
+        @Html.LabelFor(x => x.ProjectName)
+        <div class="input-group md-3">
+            @Html.TextBoxFor(x => x.ProjectName, new{@class="form-control"})
+        </div>
+        @Html.ValidationMessageFor(x => x.ProjectName, "", new{@class="error-message"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.ProjectNotes)
+        <div class="input-group md-3">
+            @Html.TextAreaFor(x => x.ProjectNotes, new{@class="form-control"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x=> x.StartDate)
+        <div class="input-group">
+            @Html.TextBoxFor(x => x.StartDate, new{@class="form-control datetimepicker-input", data_target="#StartDate", data_toggle="datetimepicker"})
+        </div>
+        @Html.ValidationMessageFor(x => x.StartDate, "", new{@class="error-message"})
+    </div>
+    <div class="form-group">
+        <label>Estimated Timeframe</label>
+        <div class="input-group">
+            @Html.TextBoxFor(x => x.EnteredTimeAmount, new{@class="form-control"})
+            <div class="input-group-append dropdown">
+                <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="btn btn-primary-blue dropdown-toggle" href="#">
+                    <span id="selected"></span><span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">hours</a></li>
+                    <li><a href="#">days</a></li>
+                    <li><a href="#">weeks</a></li>
+                    <li><a href="#">months</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.CompanyOption)
+        <div class="form-check">
+            @Html.RadioButtonFor(x => x.CompanyOption, "customerOption1")Use Existing
+        </div>
+        <div class="form-check">
+            @Html.RadioButtonFor(x => x.CompanyOption, "customerOption2")Create New
+        </div>
+    </div>
+    <div id="existing-dropdown" style="display:none;">
+        <div class="form-group">
+            @Html.DropDownList("ExistingCompany", (SelectList)ViewBag.CompanyList, "Select a Company", new{@class="form-control lockable-control", id="CompanyDropDown"})
+        </div>
+    </div>
+    <div id="new-customer-form" style="display:none;">
+        <div class="form-group">
+            @Html.LabelFor(x => x.ProjectCompany.CompanyName)
+            <div class="input-group md-3">
+                @Html.TextBoxFor(x => x.ProjectCompany.CompanyName, new{@class="form-control"})
+            </div>
+            @Html.ValidationMessageFor(x => x.ProjectCompany.CompanyName, "", new{@class="error-message"})
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.ProjectCompany.CompanyURL)
+            <div class="input-group">
+                @Html.TextBoxFor(x => x.ProjectCompany.CompanyURL, new{@class="form-control"})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.ProjectCompany.CompanyPhone)
+            <div class="input-group">
+                @Html.TextBoxFor(x => x.ProjectCompany.CompanyPhone, new{@class="form-control"})
+            </div>
+            @Html.ValidationMessageFor(x => x.ProjectCompany.CompanyPhone, "", new{@class="error-message"})
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                @Html.TextBoxFor(x => x.ProjectCompany.CompanyStreet1, new{@class="form-control"})
+            </div>
+            @Html.ValidationMessageFor(x => x.ProjectCompany.CompanyStreet1, "", new{@class="error-message"})
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                @Html.TextBoxFor(x => x.ProjectCompany.CompanyStreet2, new{@class="form-control"})
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <div class="input-group">
+                        @Html.TextBoxFor(x => x.ProjectCompany.CompanyCity, new{@class="form-control"})
+                    </div>
+                    @Html.ValidationMessageFor(x => x.ProjectCompany.CompanyCity, "", new{@class="error-message"})
+                </div>
+                <div class="col">
+                    <div class="input-group">
+                        @Html.DropDownListFor(x => x.ProjectCompany.CompanyState, (SelectList)ViewBag.StateList, "Select State", new {@class = "form-control"})
+                    </div>
+                    @Html.ValidationMessageFor(x => x.ProjectCompany.CompanyState, "", new{@class="error-message"})
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                @Html.TextBoxFor(x => x.ProjectCompany.CompanyZip, new{@class="form-control"})
+            </div>
+            @Html.ValidationMessageFor(x => x.ProjectCompany.CompanyZip, "", new{@class="error-message"})
+        </div>
+    </div>
+    <a href="@Url.Action("CancelProject","NewProject")" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+</div>
+

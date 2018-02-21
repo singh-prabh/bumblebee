@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using BumblebeeASP.Models;
 using BumblebeeASP.Helpers;
 
 namespace BumblebeeASP
@@ -46,9 +45,9 @@ namespace BumblebeeASP
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            //load environment file
+            //load environment variables
             DotNetEnv.Env.Load();
-            //setup API Helper
+            //setup API Helper Class
             APIHelper.SetupAPIHelper();
         }
     }

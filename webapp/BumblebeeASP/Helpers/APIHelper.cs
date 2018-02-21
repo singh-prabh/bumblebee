@@ -11,7 +11,7 @@ namespace BumblebeeASP.Helpers
 {
     class TokenResponse
     {
-        public string accessToken { get; set; }
+        public string AccessToken { get; set; }
     }
     
     public static class APIHelper
@@ -37,8 +37,10 @@ namespace BumblebeeASP.Helpers
         //setup the rest client
         public static void SetupAPIHelper()
         {
-            RestClient = new RestClient();
-            RestClient.BaseUrl = new Uri(BaseURL);
+            RestClient = new RestClient()
+            {
+                BaseUrl = new Uri(BaseURL)
+            };
             RestClient.AddHandler("application/json", new JsonDeserializer());
         }
 
@@ -96,7 +98,7 @@ namespace BumblebeeASP.Helpers
             else if (StatusCode == CreatedCode)
             {
                 //get token from response
-                string content = AuthResponse.Data.accessToken;
+                string content = AuthResponse.Data.AccessToken;
                 ClientToken = content;
                 TokenResponse = content;
                 //add token
@@ -157,8 +159,10 @@ namespace BumblebeeASP.Helpers
             String queryString = "?";
             queryString += "email=" + loginModel.LoginEmail;
             //setup the request to check the user table
-            RestRequest GetPersonRequest = new RestRequest("/person" + queryString, Method.GET);
-            GetPersonRequest.RequestFormat = DataFormat.Json;
+            RestRequest GetPersonRequest = new RestRequest("/person" + queryString, Method.GET)
+            {
+                RequestFormat = DataFormat.Json
+            };
             //get list
             var PersonResponse = RestClient.Execute<List<PersonModel>>(GetPersonRequest);
             //check the status
@@ -169,8 +173,10 @@ namespace BumblebeeASP.Helpers
                 MainPerson = person;
                 return person;
             }
-            PersonModel ErrorPerson = new PersonModel();
-            ErrorPerson.PersonID = 0;
+            PersonModel ErrorPerson = new PersonModel
+            {
+                PersonID = 0
+            };
             return ErrorPerson;
         }
 
@@ -178,8 +184,10 @@ namespace BumblebeeASP.Helpers
         public static List<StatesModel> GetStateList()
         {
             //setup the request
-            RestRequest GetStatesRequest = new RestRequest("/states", Method.GET);
-            GetStatesRequest.RequestFormat = DataFormat.Json;
+            RestRequest GetStatesRequest = new RestRequest("/states", Method.GET)
+            {
+                RequestFormat = DataFormat.Json
+            };
             //get list
             var StatesResponse = RestClient.Execute<List<StatesModel>>(GetStatesRequest);
             //get status code
@@ -191,11 +199,13 @@ namespace BumblebeeASP.Helpers
         }
 
         //save company for person
-        public static bool SaveCompanyForPerson(CompanyModel companyModel)
+        public static bool SaveCompanyForUser(CompanyModel companyModel)
         {
             //first save company in database
-            RestRequest PostCompanyRequest = new RestRequest("/company", Method.POST);
-            PostCompanyRequest.RequestFormat = DataFormat.Json;
+            RestRequest PostCompanyRequest = new RestRequest("/company", Method.POST)
+            {
+                RequestFormat = DataFormat.Json
+            };
             PostCompanyRequest.AddParameter("name", companyModel.CompanyName);
             PostCompanyRequest.AddParameter("website", companyModel.CompanyURL);
             //post comany data
@@ -208,8 +218,10 @@ namespace BumblebeeASP.Helpers
                 CompanyModel createdCompany = CompanyResponse.Data;
                 int companyID = createdCompany.CompanyID;
                 //add the address 
-                RestRequest PostAddressRequest = new RestRequest("/address", Method.POST);
-                PostAddressRequest.RequestFormat = DataFormat.Json;
+                RestRequest PostAddressRequest = new RestRequest("/address", Method.POST)
+                {
+                    RequestFormat = DataFormat.Json
+                };
                 PostAddressRequest.AddParameter("companyID", companyID);
                 PostAddressRequest.AddParameter("street1", companyModel.CompanyStreet1);
                 PostAddressRequest.AddParameter("street2", companyModel.CompanyStreet2);
@@ -219,8 +231,10 @@ namespace BumblebeeASP.Helpers
                 PostAddressRequest.AddParameter("typeID", 2);
                 RestClient.Execute(PostAddressRequest);
                 //add the phone
-                RestRequest PostPhoneRequest = new RestRequest("/phone", Method.POST);
-                PostPhoneRequest.RequestFormat = DataFormat.Json;
+                RestRequest PostPhoneRequest = new RestRequest("/phone", Method.POST)
+                {
+                    RequestFormat = DataFormat.Json
+                };
                 PostPhoneRequest.AddParameter("companyID", companyID);
                 //fix phone number
                 string newNumber = companyModel.CompanyPhone.Replace("-", "");
@@ -239,6 +253,63 @@ namespace BumblebeeASP.Helpers
                 return true;
             }
             return false;
+        }
+
+        //get company list
+        public static List<CompanyModel> GetCompanyList()
+        {
+            //setup request
+            RestRequest GetCompanyRequest = new RestRequest("/company", Method.GET)
+            {
+                RequestFormat = DataFormat.Json
+            };
+            //setup response
+            var GetCompanyResponse = RestClient.Execute<List<CompanyModel>>(GetCompanyRequest);
+            if (GetCompanyResponse.StatusCode == OKCode)
+            {
+                return GetCompanyResponse.Data;
+            }
+            return null;
+        }
+
+        //get company for id
+        public static AddressModel GetAddressForCompany(int companyID)
+        {
+            //setup request
+            RestRequest GetCompanyAddressRequest = new RestRequest("/address?companyID=" + companyID, Method.GET)
+            {
+                RequestFormat = DataFormat.Json
+            };
+            //setup response 
+            var GetAddressResponse = RestClient.Execute<List<AddressModel>>(GetCompanyAddressRequest);
+            if (GetAddressResponse.StatusCode == OKCode)
+            {
+                return GetAddressResponse.Data[0];
+            }
+            return null;
+        }
+
+        //get project list
+        public static List<ProjectModel> GetProjectList()
+        {
+            //setup request
+            RestRequest GetProjectRequest = new RestRequest("/project", Method.GET)
+            {
+                RequestFormat = DataFormat.Json
+            };
+            //setup response
+            var GetProjectResponse = RestClient.Execute<List<ProjectModel>>(GetProjectRequest);
+            if (GetProjectResponse.StatusCode == OKCode)
+            {
+                return GetProjectResponse.Data;
+            }
+            return null;
+        }
+
+        //create new project
+        public static void CreateProjectForComapany(ProjectModel projectModel)
+        {
+            
         }
     }
 }

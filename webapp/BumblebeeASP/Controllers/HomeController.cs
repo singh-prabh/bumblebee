@@ -35,46 +35,42 @@ namespace BumblebeeASP.Controllers
             return View();
         }
 
-        public IActionResult Register()
-        {
-            return View();
-        }
-
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [Route("")]
         [HttpPost]
-        public ActionResult Index(LoginModel loginModel) {
-            //model is valid
-            if (ModelState.IsValid) 
+        public ActionResult Login(LoginModel loginModel)
+        {
+            if (ModelState.IsValid)
             {
-                //get a valid token for api
-                string WebToken = APIHelper.CheckToken(loginModel);
-                //issue generating token
-                if (WebToken == "error") 
+                //try and get a token
+                string TokenAttempt = APIHelper.CheckToken(loginModel);
+                if (TokenAttempt == "error")
                 {
                     ViewBag.errorMessage = "There was a problem with your login attempt";
                 }
-                //token is good, get person model
                 else
                 {
                     PersonModel Person = APIHelper.GetPersonFromLogin(loginModel);
-                    //check if user should go to onboarding or dashboard
+                    //check if person needs to go to onboarding or dashboard
                     if (Person.FinishedOnboarding == false)
                     {
-                        //go to onboarding
                         return RedirectToAction("Index", controllerName: "Welcome");
                     }
                     else
                     {
-                        //go to dashboard
-                        return RedirectToAction("Index", controllerName: "Dashboard");
+                        return RedirectToAction("Index", controllerName: "MainContent");
                     }
                 }
             }
-            //model isn't valid
             return View("Index", loginModel);
         }
     }
