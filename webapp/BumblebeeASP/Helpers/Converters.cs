@@ -29,6 +29,21 @@ namespace BumblebeeASP.Helpers
             return new SelectList(SelectList, "Value", "Text");
         }
 
+        public static List<ProjectModel> CreateProjectList()
+        {
+            List<ProjectModel> projectList = new List<ProjectModel>();
+            var Projects = APIHelper.GetProjectList();
+            if (Projects.Any())
+            {
+                foreach (ProjectModel project in Projects)
+                {
+                    projectList.Add(project);
+                }
+                return projectList;
+            }
+            return null;
+        }
+
         public static SelectList CreateStateSelectList()
         {
             List<SelectListItem> SelectList = new List<SelectListItem>();

@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"] = "Dashboard";
+    ViewData["Title"] = ViewBag.ViewName;
 }
 
 <nav class="navbar navbar-dark sticky-top navbar-expand-md" style="background-color: var(--primaryColor);">
@@ -16,18 +16,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item active navbar-active-primary">
-                <a class="nav-link" href="#"><i class="fas fa-home fa-fw"></i>Dashboard</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fas fa-tasks fa-fw"></i>Tasks</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fas fa-file-alt fa-fw"></i>Invoices</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fas fa-cog fa-fw"></i>Settings</a>
-            </li>
+            @for(var i = 0; i < ViewBag.NavCount; i++)
+            {
+                var NavItem = ViewBag.NavLinks[i];
+                var listClass = ViewBag.NavSelectedIndex == i ? "nav-item active navbar-active-primary" : "nav-item";
+                var linkClass = ViewBag.ProjectCount > 0 ? "nav-link" : "nav-link disabled";
+                string linkName = @NavItem.Name;
+                {<li class="@listClass"><a class="@linkClass" href="@Url.Action("SelectedNavLink","MainContent", new{index=i})"><i class="@NavItem.IconString"></i>@NavItem.Name</a></li>}
+               <!-- {<li class="@listClass"><a class="@linkClass" href="#"><i class="@NavItem.IconString"></i>@NavItem.Name</a></li>} -->
+            }
         </ul>
     </div>
 </nav>
@@ -56,18 +53,16 @@
                     </div>
                 </div>
                 <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active sidebar-active-primary" href="#">
-                            <i class="fas fa-folder-open fa-fw"></i>
-                            Project Name <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-folder fa-fw"></i>
-                            Project Name
-                        </a>
-                    </li>
+                    @if (ViewBag.ProjectCount > 0)
+                    {
+                        for(var i = 0; i < ViewBag.ProjectCount; i++)
+                        {
+                            var project = ViewBag.ProjectList[i];
+                            var linkClass = ViewBag.ProjectSelectedIndex == i ? "nav-link active sidebar-active-primary" : "nav-link";
+                            var iconClass = ViewBag.ProjectSelectedIndex == i ? "fas fa-folder-open fa-fw" : "fas fa-folder fa-fw";
+                            {<li class="nav-item"><a class="@linkClass" href="#"><i class="@iconClass"></i>@project.ProjectName</a></li>}
+                        }
+                    }
                 </ul>
             </div>
         </nav>
@@ -79,9 +74,24 @@
                 }
                 else
                 {
-                    if (ViewBag.ProjectListCount > 0)
+                    if (ViewBag.ProjectCount > 0)
                     {
-                        {Html.RenderPartial("TaskListView");}
+                        if (ViewBag.NavSelectedIndex == 0)
+                        {
+                            {Html.RenderPartial("DashboardView");}
+                        }
+                        else if (ViewBag.NavSelectedIndex == 1)
+                        {
+                            {Html.RenderPartial("TaskListView");}
+                        }
+                        else if (ViewBag.NavSelectedIndex == 2)
+                        {
+                            {Html.RenderPartial("InvoiceListView");}
+                        }
+                        else if (ViewBag.NavSelectedIndex == 3)
+                        {
+                            {Html.RenderPartial("SettingsView");}
+                        }
                     }
                     else
                     {

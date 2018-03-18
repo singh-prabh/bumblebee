@@ -8,6 +8,7 @@
 <div class="container">
 @using(Html.BeginForm("SaveProject", "NewProject", FormMethod.Post, new{id="NewProjectForm"}))
 {
+    <p class="error-box">@ViewBag.ProjectError</p>
     <div class="form-group">
         @Html.LabelFor(x => x.ProjectName)
         <div class="input-group md-3">
@@ -36,14 +37,10 @@
                 <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="btn btn-primary-blue dropdown-toggle" href="#">
                     <span id="selected"></span><span class="caret"></span>
                 </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">hours</a></li>
-                    <li><a href="#">days</a></li>
-                    <li><a href="#">weeks</a></li>
-                    <li><a href="#">months</a></li>
-                </ul>
+                @Html.ListBoxFor(x => x.EnteredTimeOption, (SelectList)ViewBag.TimeFrames, new{@class="dropdown-menu form-control"})
             </div>
         </div>
+        @Html.ValidationMessageFor(x => x.EnteredTimeAmount, "" , new{@class="error-message"})
     </div>
     <div class="form-group">
         @Html.LabelFor(x => x.CompanyOption)
@@ -80,6 +77,7 @@
             </div>
             @Html.ValidationMessageFor(x => x.ProjectCompany.CompanyPhone, "", new{@class="error-message"})
         </div>
+        <label>Address</label>
         <div class="form-group">
             <div class="input-group">
                 @Html.TextBoxFor(x => x.ProjectCompany.CompanyStreet1, new{@class="form-control"})
@@ -113,9 +111,28 @@
             </div>
             @Html.ValidationMessageFor(x => x.ProjectCompany.CompanyZip, "", new{@class="error-message"})
         </div>
+        <label>Contact</label>
+        <div class="form-group">
+            <div class="input-group">
+                @Html.TextBoxFor(x => x.ProjectContact.FirstName, new{@class="form-control"})
+            </div>
+            @Html.ValidationMessageFor(x => x.ProjectContact.FirstName, "", new{@class="error-message"})
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                @Html.TextBoxFor(x => x.ProjectContact.LastName, new{@class="form-control"})
+            </div>
+            @Html.ValidationMessageFor(x => x.ProjectContact.LastName, "", new{@class="error-message"})
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                @Html.TextBoxFor(x => x.ProjectContact.PersonEmail, new{@class="form-control"})
+            </div>
+            @Html.ValidationMessageFor(x => x.ProjectContact.PersonEmail, "", new{@class="error-message"})
+        </div>
     </div>
     <a href="@Url.Action("CancelProject","NewProject")" class="btn btn-secondary">Cancel</a>
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="btn btn-primary-blue">Save</button>
 }
 </div>
 

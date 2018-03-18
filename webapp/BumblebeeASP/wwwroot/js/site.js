@@ -20,7 +20,7 @@ $(function() {
 });
 
 $(function() {
-    $('.dropdown-menu a').click(function(){
+    $('.dropdown-menu option').click(function(){
         $('#selected').text($(this).text());
     });
 });

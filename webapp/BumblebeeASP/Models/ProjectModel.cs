@@ -37,13 +37,15 @@ namespace BumblebeeASP.Models
         [DeserializeAs(Name = "updatedAt")]
         public DateTime UpdatedAt { get; set; }
 
+        [Required(ErrorMessage = "A timeframe is required")]
         public int EnteredTimeAmount { get; set; }
 
-        public int EnteredTimeOption { get; set; }
+        public String EnteredTimeOption { get; set; }
 
         [Display(Name = "Customer")]
         public string CompanyOption { get; set; }
 
         public CompanyModel ProjectCompany { get; set; }
+        public PersonModel ProjectContact { get; set; }
     }
 }

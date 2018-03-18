@@ -12,23 +12,15 @@ namespace BumblebeeASP.Controllers
 {
     public class MainContentController : Controller
     {
-        private void GetProjectList()
-        {
-            var list = APIHelper.GetProjectList();
-            if ((list != null) && (list.Count() > 0))
-            {
-                PrinterClass.printDebugMessage("the project list has stuff in it");
-            }
-            else
-            {
-                PrinterClass.printErrorMessage("the project list has nothing in it");
-            }
-        }
+
+        public static int ProjectSelectedIndex = 0;
+        public static int NavigationSelectedIndex = -1;
 
         // GET: /<controller>/
         public IActionResult Index()
         {
-            GetProjectList();
+            ViewBagHelper.SetupSideBarProjects(this, ProjectSelectedIndex);
+            ViewBagHelper.SetupNavigationBar(this, NavigationSelectedIndex);
             return View("~/Views/Main/MainContent.cshtml");
         }
 
@@ -53,16 +45,12 @@ namespace BumblebeeASP.Controllers
             return View("~/Views/Main/MainContent.cshtml");
         }
 
-        [HttpPost]
-        public ActionResult SaveProject(ProjectModel projectModel)
+        public ActionResult SelectedNavLink(int index)
         {
-            return View("~/Views/Main/MainContent.cshtml", projectModel);
-        }
-
-
-        public ActionResult ProjectForm()
-        {
-            return PartialView("NewProject");
+            NavigationSelectedIndex = index;
+            ViewBagHelper.SetupSideBarProjects(this, ProjectSelectedIndex);
+            ViewBagHelper.SetupNavigationBar(this, NavigationSelectedIndex);
+            return View("/Views/Main/MainContent.cshtml");
         }
     }
 }

@@ -111,10 +111,12 @@ namespace BumblebeeASP.Helpers
         public static bool RegisterNewUser(RegisterModel registerModel)
         {
             //setup the request
-            RestRequest CreateUserRequest = new RestRequest("/users", Method.POST);
+            RestRequest CreateUserRequest = new RestRequest("/users", Method.POST)
+            {
+                RequestFormat = DataFormat.Json
+            };
             CreateUserRequest.AddParameter("email", registerModel.UserEmail);
             CreateUserRequest.AddParameter("password", registerModel.UserPassword);
-            CreateUserRequest.RequestFormat = DataFormat.Json;
             //get response
             var Response = RestClient.Execute(CreateUserRequest);
             //check response status code
@@ -306,10 +308,78 @@ namespace BumblebeeASP.Helpers
             return null;
         }
 
-        //create new project
-        public static void CreateProjectForComapany(ProjectModel projectModel)
+        //create new project for existing customer
+        public static bool SaveProjectForCompany(ProjectModel projectModel, CompanyModel companyModel)
         {
-            
+            //setup request
+            RestRequest SaveProjectRequest = new RestRequest("/project", Method.POST)
+            {
+                RequestFormat = DataFormat.Json
+            };
+            //add parameters
+            SaveProjectRequest.AddParameter("name", projectModel.ProjectName);
+            SaveProjectRequest.AddParameter("notes", projectModel.ProjectNotes);
+            SaveProjectRequest.AddParameter("startDate", projectModel.StartDate);
+            SaveProjectRequest.AddParameter("endDate", projectModel.EndDate);
+            SaveProjectRequest.AddParameter("statusID", 2);
+            SaveProjectRequest.AddParameter("companyID", companyModel.CompanyID);
+            //post project
+            var SaveProjectResponse = RestClient.Execute<ProjectModel>(SaveProjectRequest);
+            if (SaveProjectResponse.StatusCode == CreatedCode)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //create new project for new customer
+        public static bool SaveProjectAndCompany(ProjectModel projectModel)
+        {
+            //first create the Company
+            RestRequest PostCompanyRequest = new RestRequest("/company", Method.POST)
+            {
+                RequestFormat = DataFormat.Json
+            };
+            PostCompanyRequest.AddParameter("name", projectModel.ProjectCompany.CompanyName);
+            PostCompanyRequest.AddParameter("website", projectModel.ProjectCompany.CompanyURL);
+            var PostCompanyResponse = RestClient.Execute<CompanyModel>(PostCompanyRequest);
+            CompanyModel NewCompany = PostCompanyResponse.Data;
+            //add the phone number
+            RestRequest PostPhoneRequest = new RestRequest("/phone", Method.POST)
+            {
+                RequestFormat = DataFormat.Json
+            };
+            PostPhoneRequest.AddParameter("companyID", NewCompany.CompanyID);
+            string newNumber = projectModel.ProjectCompany.CompanyPhone.Replace("-", "");
+            PostPhoneRequest.AddParameter("number", newNumber);
+            PostPhoneRequest.AddParameter("typeID", 2);
+            RestClient.Execute(PostPhoneRequest);
+            //add the address 
+            RestRequest PostAddressRequest = new RestRequest("/address", Method.POST)
+            {
+                RequestFormat = DataFormat.Json
+            };
+            PostAddressRequest.AddParameter("companyID", NewCompany.CompanyID);
+            PostAddressRequest.AddParameter("street1", projectModel.ProjectCompany.CompanyStreet1);
+            PostAddressRequest.AddParameter("street2", projectModel.ProjectCompany.CompanyStreet2);
+            PostAddressRequest.AddParameter("city", projectModel.ProjectCompany.CompanyCity);
+            PostAddressRequest.AddParameter("zip", projectModel.ProjectCompany.CompanyZip);
+            PostAddressRequest.AddParameter("stateID", projectModel.ProjectCompany.CompanyState);
+            PostAddressRequest.AddParameter("typeID", 2);
+            RestClient.Execute(PostAddressRequest);
+            //add the person
+            RestRequest PostPersonRequest = new RestRequest("/person", Method.POST)
+            {
+                RequestFormat = DataFormat.Json
+            };
+            PostPersonRequest.AddParameter("firstName", projectModel.ProjectContact.FirstName);
+            PostPersonRequest.AddParameter("lastName", projectModel.ProjectContact.LastName);
+            PostPersonRequest.AddParameter("companyID", NewCompany.CompanyID);
+            PostPersonRequest.AddParameter("email", projectModel.ProjectContact.PersonEmail);
+            PostPersonRequest.AddParameter("finishedOnboarding", false);
+            RestClient.Execute(PostPersonRequest);
+            //finally save the project for the company
+            return SaveProjectForCompany(projectModel, NewCompany);
         }
     }
 }
